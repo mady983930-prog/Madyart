@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Mady Custom Art — custom artwork, digital portraits, and creative editing made just for you.">
+  <title>Mady Custom Art | Made Just for You</title>
+  <style>
+    :root {
+      --ink: #211d24;
+      --muted: #706873;
+      --paper: #fffaf7;
+      --rose: #e9a9b6;
+      --plum: #67465e;
+      --peach: #f7e1d7;
+      --line: #eadfe3;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(255,250,247,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(234,223,227,.8);
+    }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { font-weight: 850; letter-spacing: -.06em; font-size: 1.45rem; }
+    .brand span { color: var(--plum); }
+    .navlinks { display: flex; gap: 24px; align-items: center; color: var(--muted); font-size: .94rem; }
+    .navlinks a:hover { color: var(--plum); }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--plum); color: white; border: 0; border-radius: 999px;
+      padding: 13px 22px; font-weight: 700; cursor: pointer; transition: transform .2s, opacity .2s;
+    }
+    .button:hover { transform: translateY(-2px); opacity: .92; }
+    .button.light { background: white; color: var(--plum); border: 1px solid var(--line); }
+    .hero { padding: 78px 0 70px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 52px; }
+    .eyebrow { color: var(--plum); font-size: .78rem; text-transform: uppercase; letter-spacing: .16em; font-weight: 800; }
+    h1 { font-size: clamp(2.8rem, 6vw, 5.5rem); line-height: .99; letter-spacing: -.075em; margin: 18px 0 22px; }
+    h1 em { color: var(--plum); font-family: Georgia, serif; font-weight: 500; }
+    .hero p { max-width: 520px; color: var(--muted); font-size: 1.1rem; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+    .note { margin-top: 18px; font-size: .86rem !important; }
+    .art-stage {
+      min-height: 440px; border-radius: 48% 48% 26px 26px; position: relative; overflow: hidden;
+      display: grid; place-items: center; background: linear-gradient(145deg, #f5cfd1, #f6e3d7 55%, #d8c6dc);
+    }
+    .art-stage:before, .art-stage:after { content: ""; position: absolute; border-radius: 50%; border: 1px solid rgba(103,70,94,.25); }
+    .art-stage:before { width: 330px; height: 330px; }
+    .art-stage:after { width: 420px; height: 420px; }
+    .art-card {
+      position: relative; z-index: 1; width: min(270px, 68%); aspect-ratio: .78;
+      background: #fffaf7; border: 9px solid rgba(255,255,255,.7); border-radius: 160px 160px 22px 22px;
+      box-shadow: 0 28px 70px rgba(60,35,55,.18); display: grid; place-items: center; overflow: hidden;
+    }
+    .art-card svg { width: 100%; height: 100%; }
+    .floating { position: absolute; z-index: 2; background: white; padding: 12px 16px; border-radius: 16px; box-shadow: 0 10px 35px #67465e1c; font-size: .85rem; font-weight: 700; }
+    .floating.one { top: 18%; left: 2%; transform: rotate(-5deg); }
+    .floating.two { bottom: 13%; right: 0; transform: rotate(4deg); }
+    section { padding: 78px 0; }
+    .section-head { display: flex; justify-content: space-between; gap: 28px; align-items: end; margin-bottom: 30px; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.06em; line-height: 1.05; margin: 10px 0 0; }
+    .section-head p { color: var(--muted); max-width: 430px; margin: 0; }
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .service { padding: 26px; border: 1px solid var(--line); background: white; border-radius: 22px; }
+    .service .emoji { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 15px; background: var(--peach); font-size: 1.35rem; }
+    .service h3 { margin: 18px 0 8px; font-size: 1.2rem; }
+    .service p { color: var(--muted); margin: 0; font-size: .95rem; }
+    .gallery { background: #f8eeec; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .sample { min-height: 260px; border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; justify-content: end; padding: 22px; position: relative; isolation: isolate; }
+    .sample:before { content: ""; position: absolute; inset: 0; z-index: -1; }
+    .sample:nth-child(1):before { background: radial-gradient(circle at 50% 32%, #ffe5d4 0 13%, transparent 14%), radial-gradient(ellipse at 50% 43%, #b96f7d 0 21%, transparent 22%), linear-gradient(145deg, #e8b8c4, #f6d9ca); }
+    .sample:nth-child(2):before { background: radial-gradient(circle at 50% 37%, #e8bd9b 0 14%, transparent 14.5%), radial-gradient(ellipse at 50% 60%, #4e354f 0 24%, transparent 24.5%), linear-gradient(145deg, #c6b7d8, #e7d7ec); }
+    .sample:nth-child(3):before { background: radial-gradient(circle at 34% 40%, #f9e6b7 0 11%, transparent 11.5%), radial-gradient(circle at 65% 56%, #b5c9ac 0 17%, transparent 17.5%), linear-gradient(145deg, #f3c7b7, #e5d5b9); }
+    .sample:after { content: ""; position: absolute; inset: 45% 0 0; z-index: -1; background: linear-gradient(transparent, rgba(25,18,28,.62)); }
+    .sample h3 { color: white; margin: 0; font-size: 1.3rem; }
+    .sample p { color: rgba(255,255,255,.9); margin: 3px 0 0; font-size: .9rem; }
+    .gallery-tip { color: var(--muted); font-size: .88rem; margin-top: 16px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; counter-reset: steps; }
+    .step { border-top: 1px solid var(--line); padding-top: 20px; }
+    .step b { color: var(--plum); font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; }
+    .step h3 { margin: 10px 0 7px; }
+    .step p { color: var(--muted); margin: 0; }
+    .contact-panel { border-radius: 30px; background: var(--plum); color: white; padding: clamp(28px, 6vw, 62px); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
+    .contact-panel h2 { margin: 0; }
+    .contact-panel p { color: #eee1eb; max-width: 600px; }
+    .contact-panel .button { background: white; color: var(--plum); white-space: nowrap; }
+    footer { padding: 26px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, 600px); }
+      .navlinks { gap: 12px; font-size: .82rem; }
+      .navlinks .hide-mobile { display: none; }
+      nav { min-height: 64px; }
+      .navlinks .button { padding: 10px 14px; }
+      .hero { padding: 48px 0 44px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+      .art-stage { min-height: 350px; }
+      section { padding: 56px 0; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 14px; }
+      .services, .gallery-grid, .steps { grid-template-columns: 1fr; }
+      .sample { min-height: 230px; }
+      .contact-panel { grid-template-columns: 1fr; }
+      .contact-panel .button { justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#home">mady<span>.</span></a>
+      <div class="navlinks">
+        <a class="hide-mobile" href="#services">Services</a>
+        <a class="hide-mobile" href="#gallery">Gallery</a>
+        <a href="#contact" class="button">Let's create ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Custom art · Creative editing</div>
+          <h1>Your idea.<br>My art.<br><em>One of a kind.</em></h1>
+          <p>Thoughtful custom artwork and creative edits, made around your style, your story, and your vision.</p>
+          <div class="actions">
+            <a class="button" href="#contact">Order your artwork ↗</a>
+            <a class="button light" href="#gallery">Explore the gallery</a>
+          </div>
+          <p class="note">Every piece starts with your idea. Message me to discuss your project and price.</p>
+        </div>
+        <div class="art-stage" aria-label="Decorative abstract artwork">
+          <div class="floating one">✦ Made with creativity</div>
+          <div class="art-card">
+            <svg viewBox="0 0 260 340" role="img" aria-label="Abstract pastel portrait illustration">
+              <rect width="260" height="340" fill="#fffaf7"/>
+              <circle cx="130" cy="124" r="66" fill="#f1c6b4"/>
+              <path d="M65 123 C54 56 96 34 133 40 C184 35 207 80 194 132 C181 100 169 81 145 73 C125 101 99 110 65 123Z" fill="#49364b"/>
+              <path d="M55 340 C58 243 83 200 130 198 C181 201 207 246 210 340Z" fill="#bd8ca8"/>
+              <path d="M102 133 Q111 141 120 133 M142 133 Q151 141 160 133" fill="none" stroke="#49364b" stroke-width="4" stroke-linecap="round"/>
+              <path d="M119 162 Q132 173 146 161" fill="none" stroke="#b76e7c" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="83" cy="156" r="9" fill="#e99da5" opacity=".6"/><circle cx="176" cy="156" r="9" fill="#e99da5" opacity=".6"/>
+              <path d="M38 282 Q73 246 102 275 T165 276 T224 268" fill="none" stroke="#f6d9b9" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="208" cy="62" r="14" fill="#e9a9b6"/><path d="M208 38 V86 M184 62 H232" stroke="#67465e" stroke-width="2" opacity=".7"/>
+            </svg>
+          </div>
+          <div class="floating two">A little art, a lot of heart ♡</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">What I can make</div><h2>Creative services</h2></div>
+          <p>Have a specific idea? Tell me what you have in mind and we can shape it into something personal.</p>
+        </div>
+        <div class="services">
+          <article class="service"><div class="emoji">🎨</div><h3>Custom Artwork</h3><p>Personalized art made for gifts, profile pictures, room decor, or a special memory.</p></article>
+          <article class="service"><div class="emoji">✍️</div><h3>Digital Portraits</h3><p>Stylized portraits and illustrations inspired by your references and preferred aesthetic.</p></article>
+          <article class="service"><div class="emoji">✨</div><h3>Photo & Creative Editing</h3><p>Creative edits for posts, stories, covers, and other digital content.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">A little inspiration</div><h2>Made to feel like you</h2></div>
+          <p>These are sample design concepts. Replace them with your own finished projects when you're ready.</p>
+        </div>
+        <div class="gallery-grid">
+          <article class="sample"><h3>Soft Portraits</h3><p>Warm tones · Personal style</p></article>
+          <article class="sample"><h3>Dreamy Digital Art</h3><p>Colorful · Expressive</p></article>
+          <article class="sample"><h3>Aesthetic Edits</h3><p>Clean · Creative · Custom</p></article>
+        </div>
+        <p class="gallery-tip">Tip: To show your real portfolio, you can later replace these sample cards with your own artwork images.</p>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="eyebrow">Simple from start to finish</div><h2>How ordering works</h2></div>
+        </div>
+        <div class="steps">
+          <article class="step"><b>Step 01</b><h3>Share your idea</h3><p>Tell me what you want, your preferred style, and any reference images you have.</p></article>
+          <article class="step"><b>Step 02</b><h3>Confirm the details</h3><p>We'll discuss the timeline, deliverables, revisions, and price before work begins.</p></article>
+          <article class="step"><b>Step 03</b><h3>Get your custom piece</h3><p>Your finished artwork or edit is prepared and delivered digitally as agreed.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-panel">
+          <div>
+            <div class="eyebrow" style="color:#f4cbd7">Let's make something special</div>
+            <h2>Have an idea in mind?</h2>
+            <p>Send me your project details and I'll get back to you about the next steps. Custom work and pricing are discussed individually.</p>
+          </div>
+          <a class="button" href="mailto:mady983930@gmail.com?subject=Custom%20Art%20Enquiry&body=Hi%20Mady%2C%0A%0AI%27m%20interested%20in%20a%20custom%20artwork%20or%20editing%20project.%0A%0AProject%20details%3A%0AStyle%20or%20references%3A%0ADesired%20deadline%3A%0A%0AThank%20you!">Email to order ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <span><strong>mady.</strong> Custom Art & Creative Editing</span>
+      <span>© <span id="year">2026</span> Mady. Made with care.</span>
+    </div>
+  </footer>
+</body>
+</html>
